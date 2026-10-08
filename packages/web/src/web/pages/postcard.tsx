@@ -1,3 +1,4 @@
+import { asset } from "../lib/asset";
 import { useEffect, useRef, useState } from "react";
 import { Download, Upload, Check, ArrowRight, RotateCcw, ImagePlus } from "lucide-react";
 import { ToolShell, FrameControl } from "../components/tool-shell";
@@ -13,7 +14,7 @@ const defaults: PostcardData = {
   sender: "Alex",
   signOff: "With love,",
   layout: "classic",
-  photo: "/images/coast.jpg",
+  photo: asset("images/coast.jpg"),
   removeFrame: false,
 };
 let sessionDraft = { ...defaults };

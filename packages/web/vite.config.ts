@@ -17,6 +17,8 @@ export default defineConfig(({ mode }) => {
     // All env files live at the repo root — keep Vite's own env loading there too,
     // so packages/web/.env* files can never shadow the root .env.
     envDir: root,
+    // "/" for Runable. The GitHub Pages workflow sets VITE_BASE to "/<repository-name>/".
+    base: process.env.VITE_BASE || "/",
     plugins: [
       honoDevPlugin(),
       react(),

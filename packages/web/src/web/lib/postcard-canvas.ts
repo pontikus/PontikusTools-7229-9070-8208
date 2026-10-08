@@ -1,3 +1,4 @@
+import { asset } from "./asset";
 // The live preview IS the export canvas: no server, screenshot service or hidden upload.
 import { effectiveRemoveFrame, loadExportFonts } from "./canvas-utils";
 export const WIDTH = 1748,
@@ -64,7 +65,7 @@ export async function drawPostcard(
 ) {
   await loadExportFonts();
   const removeFrame = effectiveRemoveFrame(data.removeFrame);
-  const [photo, logo] = await Promise.all([image(data.photo), image("/images/pontikus-logo.png")]);
+  const [photo, logo] = await Promise.all([image(data.photo), image(asset("images/pontikus-logo.png"))]);
   const c = canvas.getContext("2d")!;
   canvas.width = WIDTH;
   canvas.height = HEIGHT;

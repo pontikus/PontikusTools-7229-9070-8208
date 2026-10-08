@@ -1,3 +1,4 @@
+import { asset } from "../lib/asset";
 import { Link } from "wouter";
 import {
   ArrowRight,
@@ -95,7 +96,7 @@ export default function Hub() {
               by you. Made for the coast.
             </p>
             <div className="hero-actions">
-              <a href="#sea-lovers" className="button">
+              <a href={asset("#sea-lovers")} className="button">
                 Explore the tools <ArrowRight size={18} />
               </a>
               <PlaceholderLink className="text-link">
@@ -118,11 +119,14 @@ export default function Hub() {
               <div className="address-decoration" />
             </div>
             <div className="postcard-decoration photo-decoration">
-              <img src="/images/coast.jpg" alt="Boats in turquoise water beside a coastal town" />
+              <img
+                src={asset("images/coast.jpg")}
+                alt="Boats in turquoise water beside a coastal town"
+              />
               <div>
                 <span className="mono">A LITTLE PIECE OF THE COAST</span>
                 <span>Wish you were here.</span>
-                <img src="/images/pontikus-logo.png" alt="Pontikus" />
+                <img src={asset("images/pontikus-logo.png")} alt="Pontikus" />
               </div>
             </div>
             <div className="art-note">
@@ -171,7 +175,7 @@ export default function Hub() {
                     const Icon = icons[tool.number - 1];
                     return (
                       <Link
-                        href={"/tools/" + tool.slug}
+                        href={"~" + asset("tools/" + tool.slug)}
                         key={tool.slug}
                         className={"tool-card " + (tool.status === "Live" ? "live-card" : "")}
                       >

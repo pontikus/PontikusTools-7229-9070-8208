@@ -1,3 +1,4 @@
+import { asset } from "../lib/asset";
 import { ArrowLeft, LockKeyhole } from "lucide-react";
 import { Link } from "wouter";
 import { Header, PlaceholderLink } from "./brand";
@@ -28,7 +29,7 @@ export function ToolShell({
       {!embed && <Header compact />}
       <main className="maker">
         {!embed && (
-          <Link href="/" className="text-link back-link">
+          <Link href={"~" + asset("")} className="text-link back-link">
             <ArrowLeft size={16} />
             All tools
           </Link>

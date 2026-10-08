@@ -1,3 +1,4 @@
+import { asset } from "../lib/asset";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight, X } from "lucide-react";
@@ -6,9 +7,9 @@ import { isEmbed } from "../lib/page";
 
 export function Brand() {
   return (
-    <Link href="/" className="brand" aria-label="Pontikus Boatyard home">
+    <Link href={"~" + asset("")} className="brand" aria-label="Pontikus Boatyard home">
       <span className="logo-tile">
-        <img src="/images/pontikus-logo.png" alt="" />
+        <img src={asset("images/pontikus-logo.png")} alt="" />
       </span>
       <span>
         PONTIKUS<span className="brand-sub">United by the coast. Built by the sea.</span>
@@ -24,12 +25,12 @@ export function Header({ compact = false }: { compact?: boolean }) {
         <Brand />
         {!compact && (
           <nav aria-label="Main navigation">
-            <a href="/#sea-lovers">Sea Lovers</a>
-            <a href="/#coastal-experts">Coastal Experts</a>
-            <a href="/#shoreline-businesses">Shoreline Businesses</a>
+            <a href={asset("#sea-lovers")}>Sea Lovers</a>
+            <a href={asset("#coastal-experts")}>Coastal Experts</a>
+            <a href={asset("#shoreline-businesses")}>Shoreline Businesses</a>
           </nav>
         )}
-        <Link href={compact ? "/" : "/tools/postcard"} className="header-link">
+        <Link href={"~" + asset(compact ? "" : "tools/postcard")} className="header-link">
           {compact ? "Back to the boatyard" : "Enter the workshop"}
           <ArrowUpRight size={16} />
         </Link>

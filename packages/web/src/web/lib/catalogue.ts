@@ -50,7 +50,7 @@ export const tools: {
     name: "Media Kit Builder",
     slug: "media-kit",
     promise: "Introduce your expertise on one polished page.",
-    status: "Planned",
+    status: "Live",
     audience: "coastal-experts",
   },
   {
@@ -58,7 +58,7 @@ export const tools: {
     name: "Rate Card Builder",
     slug: "rate-card",
     promise: "Make your services and prices clear at a glance.",
-    status: "Planned",
+    status: "Live",
     audience: "coastal-experts",
   },
   {
@@ -66,7 +66,7 @@ export const tools: {
     name: "Credential Card Maker",
     slug: "credential-card",
     promise: "Your experience, in a card-sized introduction.",
-    status: "Planned",
+    status: "Live",
     audience: "coastal-experts",
   },
   {
@@ -74,7 +74,7 @@ export const tools: {
     name: "Availability Poster Maker",
     slug: "availability",
     promise: "Let the coast know where and when to find you.",
-    status: "Planned",
+    status: "Live",
     audience: "coastal-experts",
   },
   {

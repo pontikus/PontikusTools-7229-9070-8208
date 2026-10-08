@@ -1,12 +1,16 @@
 # Pontikus Boatyard — admin guide
 
 ## What is ready
-The hub lists all 14 tools; live and planned counts come from the catalogue. Tools 1–4 are live:
+The hub lists all 14 tools; live and planned counts come from the catalogue. Tools 1–8 are live:
 - `/tools/postcard`: front/back A6 postcard, four styles and an editable sign-off (default “With love,”).
 - `/tools/passport`: up to 12 stamp-style places with date and note, on one A4 page.
 - `/tools/journal`: up to seven days, guided prompts and three photographs per day; one A4 page per day.
 - `/tools/photo-frame`: caption, location and photographer credit; square or vertical formats.
-Tools 5–14 remain planned. They have not been built.
+- `tools/media-kit`: six services, three credentials, region, bio and optional photo on one A4 page.
+- `tools/rate-card`: twelve service rows, GBP/EUR/USD, terms, validity and contact; automatic second A4 page when rows overflow.
+- `tools/credential-card`: five credentials with issuer/year, optional photo; front/back 86 × 54 mm personal summary. Always labelled “Pontikus verification: not yet verified”.
+- `tools/availability`: six locations with date ranges and notes, season and booking contact; A4 or 1080 × 1350 social output.
+Tools 9–14 remain planned and unbuilt. New samples use bracketed placeholders, not invented qualifications or testimonials.
 
 ## The files to edit
 - `packages/web/src/web/lib/catalogue.ts`: tool names, promises, statuses, audiences, 18 region names and destination URLs.
@@ -18,6 +22,8 @@ Tools 5–14 remain planned. They have not been built.
 - `packages/web/src/web/lib/postcard-canvas.ts`: the four postcard designs. Both preview and download use this same renderer.
 - New makers have their own matching page and canvas files (`passport`, `journal`, `photo-frame`).
 - `components/canvas-maker.tsx`: reusable style controls, photo upload, preview and downloads for the new tools.
+- `components/expert-fields.tsx`: repeatable entries, 18-region dropdown, optional photo control and per-tool memory-only drafts.
+- `lib/expert-canvas.ts`: four isolated render functions for the Coastal Experts tools. A measured fit-to-box helper keeps long text within its allocated panel; repeated whitespace is normalised in exports.
 - `lib/canvas-utils.ts`: explicit loading of all three fonts, effective frame setting, canvas text wrapping, photo handling and PNG/PDF export.
 - `packages/web/index.html`: British-English metadata and absolute Open Graph image URL. The image is a public copy of the supplied logo; replace its absolute URL if you host another social-sharing image.
 
@@ -30,16 +36,23 @@ The lock icon and verified-profile wording are shown. For this review the toggle
 - Passport: 1748 × 2480 PNG, or one A4 PDF page. It is a personal keepsake, not an official travel document.
 - Journal: one 1748 × 2480 PNG per day (ZIP for multiple days), or a multi-page A4 PDF.
 - Photo Frame: 1080 × 1080 or 1080 × 1920 PNG; PDF paper is 180 × 180 mm or 180 × 320 mm to preserve the ratio. Choose each format and download it separately.
+- Media kit: one 1748 × 2480 PNG or A4 PDF.
+- Rate card: one or two 1748 × 2480 pages; multi-page PNGs in ZIP, or A4 PDF. Row heights are measured; terms and contact repeat on every page.
+- Credential card: two 1016 × 638 PNGs in ZIP, or two 86 × 54 mm PDF pages. Front identifies the owner and unverified status; back lists self-reported credentials. This is not an official certificate.
+- Availability: choose A4 (1748 × 2480 PNG / A4 PDF) or social (1080 × 1350 PNG / 216 × 270 mm PDF). Download each format separately.
+- New field limits: media bio 500, services 90 each, credentials 140 each; rate service 100, unit 30, price 12, terms 300; card credential 65, issuer 45, year 6; availability location 60 and note 90. Name, role and contact fields are also bounded. Long text is fitted, not allowed to overlap neighbouring fields.
 - New tools offer Classic, Midnight and Studio styles. Every PNG/PDF uses the same rendered page canvases as its live preview. All three export fonts are explicitly loaded before drawing; failures are reported rather than silently exporting fallback fonts.
 - JPG, PNG and WebP photos up to 20 MB are read locally. Sample photo can be replaced by the user.
 - Maker details live in module memory, persist across internal navigation, and clear on refresh. No localStorage, cookies, maker API or database is used by the tools.
 - Google Fonts and the sample/static images are fetched for display. The managed platform includes its required analytics infrastructure; the privacy claim refers to maker details and uploaded photos, not to absence of all network activity.
 
 ## Hosting
-This is a managed Bun/Vite/React project, not a WordPress plugin or standalone HTML bundle. Its maker functionality is client-side. Publishing is supported through the Runable preview UI. GitHub Pages deployment has not been configured or tested; do not assume direct tool URLs will resolve there without static-host route handling.
+This is the managed Bun/Vite/React project, with the existing GitHub Pages support retained. `.github/workflows/pages.yml`, the Vite `base` configuration and `lib/asset.ts` were not changed. The Router retains its `routerBase`. Internal links use `asset()` plus Wouter’s `~` prefix to avoid adding the sub-folder twice; image URLs also use `asset()`. Slugs retain the workflow-readable `slug: "..."` format. The workflow copies a real index page for every catalogue tool. Build and local navigation were tested under `/PontikusTools-7229/`; a new public deployment has not been performed in this build task.
+
+Known pre-existing template limitation: the required Runable analytics plugin injects a root `/runable.js` URL, which returns 404 in the local sub-folder test. Tool images, routes and downloads are unaffected. The template-managed analytics plugin was left intact; its sub-folder support needs a platform-level fix.
 
 ## Embed in Pontikus / WordPress
-Add `?embed=1` to any live tool URL. It hides the site header, footer and “All tools” link while retaining the maker and privacy note. For a WordPress Custom HTML block, replace `[PUBLISHED BOATYARD URL]` below with your actual HTTPS origin (no trailing slash):
+Add `?embed=1` to any live tool URL. It hides the site header, footer and “All tools” link while retaining the maker and privacy note. For a WordPress Custom HTML block, replace `[PUBLISHED BOATYARD URL]` below with the complete published site base, including its repository sub-folder (no trailing slash):
 
 ```html
 <iframe
@@ -53,9 +66,12 @@ Add `?embed=1` to any live tool URL. It hides the site header, footer and “All
 ></iframe>
 ```
 
-Swap `postcard` for `passport`, `journal` or `photo-frame` and update the title. The iframe has a fixed initial height; long forms can scroll inside it. Avoid a sandbox attribute unless you configure it to permit scripts, same-origin access and downloads.
+Swap `postcard` for any live tool slug and update the title. The iframe has a fixed initial height; long forms can scroll inside it. Avoid a sandbox attribute unless you configure it to permit scripts, same-origin access and downloads.
 
 **Published framing permission: not confirmed.** No published Boatyard URL was available to check. Local embed mode was tested, but that does not establish whether the published site permits embedding on `https://pontikus.com`. The published response must have no blocking `X-Frame-Options` policy, and its CSP `frame-ancestors` must permit `https://pontikus.com` (and `https://www.pontikus.com` if used). Hosting/proxy policy cannot be overridden from React or an HTML meta tag. Check the actual published response headers and test inside Pontikus before launch.
 
 ## Stage-two verification
 Build and lint pass. All four live tools tested at 390px without horizontal overflow. Embed navigation hiding, runtime gate restoration and PNG/PDF downloads tested. Passport tested at 12 entries; Journal tested at seven days and three photographs, with seven-page A4 PDF and seven PNGs. Tools 5–14 intentionally remain unbuilt.
+
+## Stage-three verification
+Tools 5–8 tested at 390px with every repeatable entry added and fields filled to maximum length. Classic/Midnight/Studio, local photos, page titles, audience, embed mode, runtime frame locking, PNG/PDF downloads and sub-folder navigation pass. Rate overflow produces two A4 pages; credential PDF has two wallet-size pages; social availability PNG is exactly 1080 × 1350. Typecheck, build and lint pass. Tools 9–14 remain unbuilt. No GitHub push or public deployment was requested or performed in this turn.

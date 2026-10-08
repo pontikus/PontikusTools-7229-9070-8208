@@ -9,6 +9,11 @@
 - Stop for user review after delivery.
 
 # Stage two — complete
+- Stage three requested: build tools 5–8 only in /home/user/pontikus-github-push; preserve Pages workflow, asset helper, Vite base and Router base. No push requested in this turn.
+- Stage three verified: all four new tools at 390px and maximum entry/field lengths, three styles, photos, runtime frame restoration, PNG/PDF and subfolder navigation. Rate card gives two A4 pages even with wide unbroken maximum input; credential gives two 86×54 mm pages; availability social is 1080×1350.
+- Typecheck, build (root and Pages base) and lint pass. Workflow, asset helper and Vite config hashes unchanged; Router base retained.
+- Existing template analytics script requests root /runable.js and gets 404 under the subfolder; template-managed plugin left untouched. Admin guide notes this. No tool/image HTTP errors or browser exceptions.
+- Tools 1–8 Live, 9–14 Planned. No push or public deployment in this turn. Deliver /home/user/pontikus-github-push at 4200; stop for review.
 - Applied metadata, per-page titles, catalogue-driven audience and counts, new tagline, explicit export font loading, effective and reactive frame gating, embed mode and editable postcard sign-off.
 - Built only tools 2–4: Passport (12 places), Journal (7 days, 3 photos/day), Photo Frame (square/vertical). Catalogue has 4 Live, 10 Planned.
 - Shared canvas utilities and controls; PNG/PDF use preview canvas pages. Session memory only.

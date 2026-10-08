@@ -9,6 +9,7 @@ Exports: A6 landscape, 1748×1240 pixels at approximately 300dpi. All data and p
 Locked frame-removal presentation with configurable gating, initially ungated. Placeholders for verification and suggestion URLs open a labelled information dialog rather than a broken external link.
 Stage two: tools 1–4 share the four-step shell, configurable frame, explicit font-loading and session-only drafts. Passport is one A4 page with up to 12 stamp entries. Journal is up to seven A4 pages with three photos each. Photo frame uses square/vertical social canvases. Cream, midnight navy and minimal styles remain consistent with the original workshop.
 Embed mode removes site navigation while keeping maker controls and privacy wording. Audience labels and live counts read the catalogue. Tools 5–14 remain planned.
+Stage three: four Coastal Experts makers reuse the same shell, three styles and canvas pipeline. Media kit is a structured A4 profile with bounded service/credential panels. Rate card is a measured table with automatic second page. Credential summary is an 86×54 mm front/back card with explicit unverified wording. Availability uses the same content in A4 and 1080×1350 formats. Placeholder content only, no claims of credentials. Text boxes fit measured lines within reserved areas; all Pages configuration is retained.
 # <App Name> — Design
 
 > Starter design brief. Replace this content with the app you're building before writing any UI.

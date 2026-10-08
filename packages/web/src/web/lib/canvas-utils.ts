@@ -1,3 +1,4 @@
+import { asset } from "./asset";
 import { settings } from "./catalogue";
 export const NAVY = "#0B1F3B",
   CREAM = "#F7F3EB",
@@ -97,7 +98,7 @@ export async function drawFrame(
 ) {
   if (effectiveRemoveFrame(remove)) return;
   const size = Math.round(w * 0.045);
-  const logo = await loadImage("/images/pontikus-logo.png");
+  const logo = await loadImage(asset("images/pontikus-logo.png"));
   c.fillStyle = CREAM;
   c.fillRect(0, h - size, w, size);
   c.strokeStyle = "#d9d3c6";

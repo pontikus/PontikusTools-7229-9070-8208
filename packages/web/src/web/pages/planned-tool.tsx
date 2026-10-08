@@ -1,3 +1,4 @@
+import { asset } from "../lib/asset";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Anchor } from "lucide-react";
 import { Header, PlaceholderLink } from "../components/brand";
@@ -20,11 +21,11 @@ export default function PlannedTool() {
             ? "This tool is planned, not yet available. The Postcard Maker is ready to try while the rest of the workshop takes shape."
             : "Head back to the workshop to find your next tool."}
         </p>
-        <Link href="/tools/postcard" className="button">
+        <Link href={"~" + asset("tools/postcard")} className="button">
           Try Postcard Maker <ArrowRight size={18} />
         </Link>
         {!isEmbed() && (
-          <Link href="/" className="text-link">
+          <Link href={"~" + asset("")} className="text-link">
             <ArrowLeft size={16} />
             Back to all tools
           </Link>
